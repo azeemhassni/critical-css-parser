@@ -1,6 +1,6 @@
 {
   "name": "critical-css-parser",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Get critical (above-the-fold) and the rest CSS using Puppeteer.",
   "source": "src/index.js",
   "main": "dist/index.js",
