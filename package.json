@@ -29,7 +29,7 @@
     "test": "mocha --timeout 150000",
     "prerelease": "npm run build && git add dist && git diff-index --quiet HEAD || git commit -m 'Build assets'",
     "release": "npm version",
-    "postrelease": "git push origin --tags"
+    "postrelease": "git push origin master --tags"
   },
   "dependencies": {
     "axios": "^0.18.0",
