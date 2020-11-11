@@ -27,7 +27,7 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "test": "mocha --timeout 150000",
-    "prerelease": "npm run build && git add dist; git commit -m 'Build assets'",
+    "prerelease": "npm run build && git add dist && git diff-index --quiet HEAD || git commit -m 'Build assets'",
     "release": "npm version",
     "postrelease": "git push origin --tags"
   },
