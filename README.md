@@ -1,6 +1,7 @@
 # critical-css-parser
 
-[![install size](https://packagephobia.now.sh/badge?p=critical-css-parser)](https://packagephobia.now.sh/result?p=critical-css-parser)
+![tests status badge](https://github.com/azeemhassni/critical-css-parser/workflows/test/badge.svg)
+
 
 > **Critical-css-parser** allows you to receive critical (**above-the-fold**) and the rest CSS.
 > It might be helpful to speed up initial rendering of a web page. **[More information](https://web.dev/defer-non-critical-css/)**.
