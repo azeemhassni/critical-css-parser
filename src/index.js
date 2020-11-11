@@ -19,6 +19,7 @@ async function criticalCSSParser( options ) {
   	if( options.type === 'HTML' ) {
 		const { html = '', css = '', whitelist = /#fooBazBarAboveTheFold8917/, minify = false } = options;
 		const { puppeteerArgs } = options;
+		const timeout = options.timeout || 3000;
 		const browser = await puppeteer.launch({
 			args: puppeteerArgs
 		});
@@ -26,14 +27,14 @@ async function criticalCSSParser( options ) {
 		// Puppeteer page with desktop version
 		const page = await browser.newPage();
 		await page.setDefaultNavigationTimeout( 60000 );
-		await page.setContent(html, { waitUntil: 'networkidle2'	});
+		await page.setContent(html, { waitUntil: 'networkidle2', timeout });
 		await page.addStyleTag({ content: css });
 		await page.setViewport({ width: 1920, height: 1200 });
 
 		// Puppeteer page with mobile version
 		const page2 = await browser.newPage();
 		await page2.setDefaultNavigationTimeout( 60000 );
-		await page2.setContent(html, { waitUntil: 'networkidle2' });
+		await page2.setContent(html, { waitUntil: 'networkidle2', timeout });
 		await page2.addStyleTag({ content: css });
 		await page2.setViewport({ width: 480, height: 650, isMobile: true, hasTouch: true });
 		
@@ -49,6 +50,8 @@ async function criticalCSSParser( options ) {
 		const { URL = '', enableGoogleFonts = 0, whitelist = /#fooBazBarAboveTheFold8917/, minify = false } = options;
 
 		const { puppeteerArgs } = options;
+		const timeout = options.timeout || 3000;
+
 		const browser = await puppeteer.launch({
 			args: puppeteerArgs
 		});
@@ -57,7 +60,7 @@ async function criticalCSSParser( options ) {
 		// Puppeteer page with desktop version
 		const page = await browser.newPage();
 		await page.setDefaultNavigationTimeout( 60000 );
-		await page.goto(URL, { waitUntil: 'networkidle2' });		
+		await page.goto(URL, { waitUntil: 'networkidle2', timeout });		
 		await page.setViewport({ width: 1920, height: 1200 });
 		let styleHrefs = await page.$$eval('link[rel=stylesheet]', els => Array.from(els).map(s => s.href));
 		if( !enableGoogleFonts ) {
@@ -67,7 +70,7 @@ async function criticalCSSParser( options ) {
 		// Puppeteer page with mobile version
 		const page2 = await browser.newPage();
 		await page2.setDefaultNavigationTimeout( 60000 );
-		await page2.goto(URL, { waitUntil: 'networkidle2' });		
+		await page2.goto(URL, { waitUntil: 'networkidle2', timeout });		
 		await page2.setViewport({ width: 480, height: 650, isMobile: true, hasTouch: true }); 
 		
 		const aboveTheFold = await aboveTheFoldHTML( page, 1200 );
@@ -93,6 +96,8 @@ async function criticalCSSParser( options ) {
 		server.listen(6543);
 
 		const { puppeteerArgs } = options;
+		const timeout = options.timeout || 3000;
+
 		const browser = await puppeteer.launch({
 			args: puppeteerArgs
 		});
@@ -100,7 +105,7 @@ async function criticalCSSParser( options ) {
 		// Puppeteer page with desktop version
 		const page = await browser.newPage();
 		await page.setDefaultNavigationTimeout( 60000 );
-		await page.goto(`http://127.0.0.1:6543/${filename}`, { waitUntil: 'networkidle2' });		
+		await page.goto(`http://127.0.0.1:6543/${filename}`, { waitUntil: 'networkidle2', timeout });		
 		await page.setViewport({ width: 1920, height: 1200 });
 		let styleHrefs = await page.$$eval('link[rel=stylesheet]', els => Array.from(els).map(s => s.href));
 		if( !enableGoogleFonts ) {
@@ -110,7 +115,7 @@ async function criticalCSSParser( options ) {
 		// Puppeteer page with mobile version
 		const page2 = await browser.newPage();
 		await page2.setDefaultNavigationTimeout( 60000 );
-		await page2.goto(`http://127.0.0.1:6543/${filename}`, { waitUntil: 'networkidle2' });		
+		await page2.goto(`http://127.0.0.1:6543/${filename}`, { waitUntil: 'networkidle2', timeout });		
 		await page2.setViewport({ width: 480, height: 650, isMobile: true, hasTouch: true }); 
 		
 		const aboveTheFold = await aboveTheFoldHTML( page, 1200 );
