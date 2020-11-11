@@ -18,8 +18,10 @@ const { get } = require('axios');
 async function criticalCSSParser( options ) {
   	if( options.type === 'HTML' ) {
 		const { html = '', css = '', whitelist = /#fooBazBarAboveTheFold8917/, minify = false } = options;
-		
-		const browser = await puppeteer.launch();
+		const { puppeteerArgs } = options;
+		const browser = await puppeteer.launch({
+			args: puppeteerArgs
+		});
 
 		// Puppeteer page with desktop version
 		const page = await browser.newPage();
