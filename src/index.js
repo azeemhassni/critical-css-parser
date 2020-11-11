@@ -47,8 +47,12 @@ async function criticalCSSParser( options ) {
 
 	} else if( options.type === 'URL' ) {
 		const { URL = '', enableGoogleFonts = 0, whitelist = /#fooBazBarAboveTheFold8917/, minify = false } = options;
-		
-		const browser = await puppeteer.launch();
+
+		const { puppeteerArgs } = options;
+		const browser = await puppeteer.launch({
+			args: puppeteerArgs
+		});
+
 
 		// Puppeteer page with desktop version
 		const page = await browser.newPage();
@@ -87,8 +91,11 @@ async function criticalCSSParser( options ) {
 		// Create local server to open the page
 		const server = httpServer.createServer({root: entrypoint});
 		server.listen(6543);
-		
-		const browser = await puppeteer.launch();
+
+		const { puppeteerArgs } = options;
+		const browser = await puppeteer.launch({
+			args: puppeteerArgs
+		});
 
 		// Puppeteer page with desktop version
 		const page = await browser.newPage();
