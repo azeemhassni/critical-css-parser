@@ -27,7 +27,7 @@
     "build": "microbundle",
     "dev": "microbundle watch",
     "test": "mocha --timeout 150000",
-    "release": "npm run build && git add dist && git commit -m 'Build assets' && npm version && git push origin --tags"
+    "release": "npm run build && git add dist; git commit -m 'Build assets'; npm version && git push origin --tags"
   },
   "dependencies": {
     "axios": "^0.18.0",
